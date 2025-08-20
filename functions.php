@@ -10,4 +10,4 @@ require_once ('include/theme_functions.php');
 require_once ('include/headers.php');
 require_once ('include/ui_kit.php');
 require_once ('include/theme_ajax.php');
-
+require_once ('include/api-openai.php');
