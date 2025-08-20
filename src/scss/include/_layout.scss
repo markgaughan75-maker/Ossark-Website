@@ -1,0 +1,204 @@
+/*
+=================================================================
+    Layout Spacing
+=================================================================
+*/
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+section, .section {
+    padding: $section-margin-laptop 0;
+    &:first-child {
+        padding: calc($section-margin-laptop + $header-height) 0 $section-margin-laptop 0;
+    }
+    @media (max-width: $mobile) {
+        padding: $section-margin-mobile 0;
+        &:first-child {
+            padding: calc($section-margin-mobile + $header-height) 0 $section-margin-mobile 0;
+        }
+    }
+    @media (min-width: $hd) {
+        padding: $section-margin-desktop 0;
+        &:first-child {
+            padding: calc($section-margin-desktop + $header-height) 0 $section-margin-desktop 0;
+        }
+    }
+}
+
+.container {
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 $container-padding-desktop;
+    @media (max-width: $tablet) {
+        padding: 0 $container-padding-tablet;
+        column-gap: $grid-column-gap-tablet;
+    }
+    @media (max-width: $mobile) {
+        padding: 0 $container-padding-mobile;
+        column-gap: $grid-column-gap-mobile;
+    }
+    @media (min-width: $hd) {
+        padding: 0 $container-padding-hd-screens;
+        column-gap: $grid-column-gap-desktop;
+        max-width: 1920px;
+    }
+}
+
+.row {
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat($grid-columns-desktop, 1fr);
+    column-gap: $grid-column-gap-desktop;
+    // mobile
+    @media (max-width: $mobile) {
+        display: flex;
+        flex-direction: column;
+    }
+    // tablet
+    @media (min-width: $mobile) and (max-width: $tablet) {
+        grid-template-columns: repeat($grid-columns-tablet, 1fr);
+        column-gap: $grid-column-gap-tablet;
+    }
+}
+
+.row-flex {
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    // mobile
+    @media (max-width: $mobile) {
+        flex-direction: column;
+    }
+}
+
+/*
+=================================================================
+    Grid
+=================================================================
+*/
+
+// create all grid column classes for dekstop
+@for $i from 1 through $grid-columns-desktop {
+	.col-#{$i} {
+		grid-column: span #{$i};
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        @include max-screen($mobile) {
+            width: 100%;
+        }
+	}
+	// create all grid column offset classes
+	@for $j from 1 through calc($grid-columns-desktop - $i) {
+		@if $i < $grid-columns-desktop {
+			.col-#{$i}-offset-#{$j} {
+				display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                position: relative;
+				grid-column-start: #{$j + 1};
+				grid-column-end: #{$i + $j + 1};
+                @include max-screen($mobile) {
+                    width: 100%;
+                }
+			}
+		}
+	}
+}
+
+// create all grid column classes for dekstop
+// @for $i from 1 through $grid-columns-desktop {
+// 	.col-#{$i} {
+// 		grid-column: span #{$i};
+//         @media(max-width: $mobile) {
+//             width: 100%;
+//         }
+// 	}
+// }
+
+// // create all grid column classes for mobile
+// @for $i from 1 through $grid-columns-mobile {
+// 	@media(max-width: $mobile) {
+// 		.col-sm-#{$i} {
+// 			grid-column: span #{$i};
+// 		}
+// 	}
+// }
+
+// create all grid column classes for tablet
+// @for $i from 1 through $grid-columns-tablet {
+//     @media (max-width: $tablet) {
+//         .col-md-#{$i} {
+//             grid-column: span #{$i};
+//         }
+//     }
+// }
+
+// // create all grid column classes for hd-screens
+// @for $i from 1 through $grid-columns-hd-screens {
+//     @media(min-width: $hd) {
+//         .col-lg-#{$i} {
+//             grid-column: span #{$i};
+//         }
+//     }
+// }
+
+/*
+=================================================================
+    Spacing
+=================================================================
+*/
+
+// create all padding and margin classes
+@each $space in $spacing {
+    @each $class, $class-name in zip($directions, $directions-classname) {
+        .#{$class-name}-#{$space} {
+            #{$class}: #{$space}px;
+        }
+    }
+}
+
+// override certain padding and margin classes for mobile
+@media(max-width: $mobile) {
+    @each $class, $class-name in zip($directions, $directions-classname) {
+        @each $desktop, $mobile in zip($desktop-change, $mobile-change) {
+            .#{$class-name}-#{$desktop} {
+                #{$class}: #{$mobile}px;
+            }
+        }
+    }
+}
+
+
+// override certain padding and margin classes
+.m-0 {
+    margin: 0 !important;
+}
+.p-0 {
+    padding: 0 !important;
+}
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+.pb-0 {
+    padding-bottom: 0 !important;
+}
+.mt-0 {
+    margin-top: 0 !important;
+}
+.pt-0 {
+    padding-top: 0 !important;
+}
