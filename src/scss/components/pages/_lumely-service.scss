@@ -1,0 +1,35 @@
+.lumely-service__hero {
+  position: relative;
+  background: var(--hero-bg) no-repeat center/cover;
+  color: #fff;
+  .kicker { opacity: .9; text-transform: uppercase; letter-spacing: .08em; }
+  .display { margin: 12px 0; line-height: 1.05; }
+  .lede { max-width: 52ch; opacity: .95; }
+  .cta { margin-top: 20px; }
+  .badges { display:flex; gap:12px; margin-top: 18px; flex-wrap:wrap; li{background:rgba(0,0,0,.35); padding:6px 10px; border-radius:999px;} }
+  .hero-art { min-height: 360px; }
+}
+
+.lumely-service__features {
+  .feature { gap: 10px; .feature__icon{width:40px; height:auto; margin-bottom:8px;} }
+}
+
+.lumely-service__gallery {
+  .gallery__item { gap: 8px; figcaption{opacity:.75; font-size:.95rem;} }
+}
+
+.lumely-service__process {
+  .process__step { gap: 8px; .process__index{font-weight:600; font-size:1.25rem;} }
+}
+
+.lumely-service__cta {
+  background: #0f0f12; color: #fff; border-radius: 16px; padding: 28px;
+  .btn { margin-top: 8px; }
+}
+
+.lumely-service__faq {
+  .faq__item { border-top: 1px solid rgba(0,0,0,.1); padding: 14px 0; }
+  .faq__q { all: unset; display:block; cursor:pointer; font-weight:600; }
+  .faq__a { display:none; padding-top: 10px; }
+  .faq__item[open] .faq__a, .faq__q[aria-expanded="true"] + .faq__a { display:block; }
+}
