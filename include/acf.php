@@ -219,3 +219,74 @@ function allowed_block_types( $allowed_blocks, $post ) {
 	return $all_blocks;
 }
 
+<?php
+// ...existing code...
+
+if (function_exists('acf_add_local_field_group')) {
+
+    acf_add_local_field_group([
+        'key' => 'group_lumely_service',
+        'title' => 'Lumely Service Page',
+        'location' => [[[
+            'param' => 'page_template',
+            'operator' => '==',
+            'value' => 'templates/lumely-service.php',
+        ]]],
+        'fields' => [
+            ['key'=>'field_service_slug','label'=>'Service slug (for body class)','name'=>'service_slug','type'=>'text','instructions'=>'Example: render-enhancement, virtual-staging, design-options'],
+            ['key'=>'field_hero_kicker','label'=>'Hero kicker','name'=>'hero_kicker','type'=>'text'],
+            ['key'=>'field_hero_title','label'=>'Hero title','name'=>'hero_title','type'=>'text','required'=>1],
+            ['key'=>'field_hero_subtitle','label'=>'Hero subtitle','name'=>'hero_subtitle','type'=>'textarea','rows'=>3],
+            ['key'=>'field_hero_bg','label'=>'Hero background','name'=>'hero_background','type'=>'image','return_format'=>'array','preview_size'=>'medium','library'=>'all'],
+            ['key'=>'field_hero_cta','label'=>'Hero CTA','name'=>'hero_cta','type'=>'link'],
+
+            [
+                'key'=>'field_badges','label'=>'Badges','name'=>'badges','type'=>'repeater',
+                'layout'=>'row','button_label'=>'+ Add badge',
+                'sub_fields'=>[
+                    ['key'=>'field_badges_label','label'=>'Label','name'=>'label','type'=>'text'],
+                ]
+            ],
+            [
+                'key'=>'field_features','label'=>'Features','name'=>'features','type'=>'repeater',
+                'min'=>3,'layout'=>'block','button_label'=>'+ Add feature',
+                'sub_fields'=>[
+                    ['key'=>'field_feature_icon','label'=>'Icon','name'=>'icon','type'=>'image','return_format'=>'array','preview_size'=>'thumbnail'],
+                    ['key'=>'field_feature_title','label'=>'Title','name'=>'title','type'=>'text'],
+                    ['key'=>'field_feature_text','label'=>'Text','name'=>'text','type'=>'textarea','rows'=>3],
+                ]
+            ],
+            [
+                'key'=>'field_gallery','label'=>'Gallery','name'=>'gallery','type'=>'repeater',
+                'layout'=>'block','button_label'=>'+ Add image',
+                'sub_fields'=>[
+                    ['key'=>'field_gallery_img','label'=>'Image','name'=>'image','type'=>'image','return_format'=>'array','preview_size'=>'medium'],
+                    ['key'=>'field_gallery_caption','label'=>'Caption','name'=>'caption','type'=>'text'],
+                ]
+            ],
+            [
+                'key'=>'field_process','label'=>'Process','name'=>'process','type'=>'repeater',
+                'layout'=>'block','button_label'=>'+ Add step',
+                'sub_fields'=>[
+                    ['key'=>'field_process_title','label'=>'Step title','name'=>'step_title','type'=>'text'],
+                    ['key'=>'field_process_text','label'=>'Step text','name'=>'step_text','type'=>'textarea','rows'=>2],
+                ]
+            ],
+            [
+                'key'=>'field_cta_block','label'=>'Bottom CTA','name'=>'cta_block','type'=>'group',
+                'sub_fields'=>[
+                    ['key'=>'field_cta_title','label'=>'Title','name'=>'title','type'=>'text'],
+                    ['key'=>'field_cta_text','label'=>'Text','name'=>'text','type'=>'textarea','rows'=>2],
+                    ['key'=>'field_cta_button','label'=>'Button','name'=>'button','type'=>'link'],
+                ]
+            ],
+            [
+                'key'=>'field_faq','label'=>'FAQs','name'=>'faq','type'=>'repeater','button_label'=>'+ Add Q&A',
+                'sub_fields'=>[
+                    ['key'=>'field_faq_q','label'=>'Question','name'=>'question','type'=>'text'],
+                    ['key'=>'field_faq_a','label'=>'Answer','name'=>'answer','type'=>'wysiwyg','tabs'=>'visual','toolbar'=>'basic','media_upload'=>0],
+                ]
+            ],
+        ],
+    ]);
+}
